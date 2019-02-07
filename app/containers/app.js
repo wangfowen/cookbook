@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import * as reducers from '../reducers';
-import Root from '../components/RootRouter';
+import Root from '../components/RootRouter.js';
 
 const reducer = combineReducers(reducers);
 const store = createStore(reducer);

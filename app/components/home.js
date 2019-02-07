@@ -9,15 +9,16 @@ const instructions = Platform.select({
 });
 
 export default class Home extends Component {
-  constructor(props) {
-    super(props);
-  }
+  static navigationOptions = {
+
+  };
 
   render() {
+    const {navigate} = this.props.navigation;
+
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
+        <Text style={styles.welcome}>Basic test app</Text>
         <Text style={styles.instructions}>{instructions}</Text>
       </View>
     )
