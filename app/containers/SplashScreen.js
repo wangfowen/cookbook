@@ -6,6 +6,7 @@ import {initApp} from '../actions/AppActions';
 
 class SplashScreen extends Component {
   componentDidMount() {
+    //TODO: use the init properly
     this.props.initApp();
 
     const {navigation} = this.props;
