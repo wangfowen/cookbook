@@ -6,21 +6,36 @@ import {initApp} from '../actions/AppActions';
 
 class SplashScreen extends Component {
   componentDidMount() {
-    //TODO: use the init properly
     this.props.initApp();
+  }
 
+  componentWillReceiveProps(newProps) {
+    if (this.props.firstLoad === undefined && newProps.firstLoad !== undefined) {
+      this.redirect(newProps.firstLoad);
+    }
+  }
+
+  redirect(firstLoad) {
     const {navigation} = this.props;
-    if (this.props.firstLoad) {
+    if (firstLoad) {
+      navigation.replace("Preferences");
+    } else {
       navigation.replace("Home");
     }
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.splash}>Cook Book Splash Screen</Text>
-      </View>
-    )
+    const {firstLoad} = this.props;
+
+    if (firstLoad === undefined) {
+      return (
+        <View style={styles.container}>
+          <Text style={styles.splash}>Cook Book Splash Screen</Text>
+        </View>
+      )
+    } else {
+      return null;
+    }
   }
 }
 

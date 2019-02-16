@@ -1,9 +1,21 @@
-import dbUtils from '../db/db-utils';
+import Settings from '../db/models/Settings';
 
-const db = new dbUtils();
 export const INIT_APP = "INIT_APP";
 export const initApp = () => {
-  return dispatch => {
-    db.changeSetting();
+  return async (dispatch) => {
+    try {
+      const settings = await Settings.getOrCreateSetting();
+      dispatch(loadSettings(settings));
+    } catch(e) {
+      console.log(e);
+    }
   }
-}
+};
+
+export const LOAD_SETTINGS = "LOAD_SETTINGS";
+export const loadSettings = (settings) => {
+  return {
+    type: LOAD_SETTINGS,
+    settings
+  }
+};

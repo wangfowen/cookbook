@@ -1,34 +1,53 @@
-import Settings from './models/Settings';
 import Realm from 'realm';
 
-export default class dbUtils {
-  _changeSetting = (isFirstLoad=true) => {
+const dbUtils = {
+  writeDb: (schema, writeFunc) => {
    return new Promise((resolve, reject) => {
-     try {
-       let modifiedDbObjects = []
-       //TODO: this isn't working, look into why
-       Realm.open({schema: [Settings]})
+      Realm.open(schema)
         .then(realm => {
+          let modifiedDbObjects = []
           realm.write(() => {
-            modifiedDbObjects.push(realm.create('Setting', {id: 1, isFirstLoad: isFirstLoad}, true));
+            modifiedDbObjects.push(writeFunc(realm));
           });
+          resolve(modifiedDbObjects);
+        })
+        .catch(e => {
+          reject(e);
         });
-        resolve(modifiedDbObjects)
-      } catch (e) {
-        reject(e)
-      }
     })
-  }
+  },
 
-  //TODO: finish implement this 
-  changeSetting = () => {
-    this._changeSetting(false)
-      .then((modifiedDbObjects) => {
-        console.log(modifiedDbObjects);
-        //this.store.dispatch(successAction(modifiedObjects))
-      }).catch((e) => {
-        console.log(e);
-        //this.store.dispatch(errorAction(error))
-      })
+  readDb: (schema, readFunc) => {
+   return new Promise((resolve, reject) => {
+      Realm.open(schema)
+        .then(realm => {
+          const results = readFunc(realm);
+          resolve(results);
+        })
+        .catch(e => {
+          reject(e);
+        });
+    })
+  },
+
+  firstOrCreateDb: (schema, readFunc, writeFunc) => {
+    return new Promise((resolve, reject) => {
+      Realm.open(schema)
+        .then(realm => {
+          let result = readFunc(realm)[0];
+          if (result === undefined) {
+            realm.write(() => {
+              result = writeFunc(realm);
+            });
+          }
+
+          resolve(result);
+        })
+        .catch(e => {
+          reject(e);
+        });
+    });
   }
-}
+};
+
+export default dbUtils;

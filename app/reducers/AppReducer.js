@@ -1,15 +1,17 @@
-import {INIT_APP} from '../actions/AppActions';
+import {LOAD_SETTINGS} from "../actions/AppActions";
 
 const initialState = {
-  firstLoad: true,
+  firstLoad: undefined,
   preferences: {}
 };
 
 const AppReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case INIT_APP:
-      console.log("initing app");
-      return state;
+    case LOAD_SETTINGS:
+      return {
+        ...state,
+        firstLoad: action.settings.isFirstLoad
+      };
     default:
       return state;
   }
