@@ -17,7 +17,7 @@ Recipe.loadRecipes = () => {
   for now, it'll get it from a JSON file
   */
 
-  //TODO: come up with format for recipes
+  //TODO: think about what JSON data need to look like to render
   return new Promise((resolve, reject) => {
     resolve([
       {
@@ -33,9 +33,11 @@ Recipe.loadRecipes = () => {
     ]);
   });
 
-  //TODO: load latest data from JSON
+  //TODO: think about how write recipes to be easy to write, but then can convert into data needed
+  //TODO: load latest data from file
   //TODO: if data is different from what's in realm, overwrite what's in realm
-  //TODO: if no internet, load from realm, parsing the stored content
+  //TODO: if no internet, just load from realm
+  //TODO: parse data into JSON
 }
 
 export default Recipe;
