@@ -6,8 +6,8 @@ Settings.schema = {
   name: 'Settings',
   primaryKey: 'id',
   properties: {
-      id: 'int',
-      isFirstLoad: 'bool'
+    id: 'int',
+    isFirstLoad: 'bool'
   }
 }
 

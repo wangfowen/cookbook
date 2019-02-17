@@ -18,7 +18,9 @@ class SplashScreen extends Component {
   redirect(firstLoad) {
     const {navigation} = this.props;
     if (firstLoad) {
-      navigation.replace("Preferences");
+      //TODO: add preferences page
+      //navigation.replace("Preferences");
+      navigation.replace("Home");
     } else {
       navigation.replace("Home");
     }
