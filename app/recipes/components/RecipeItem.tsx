@@ -1,7 +1,13 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-export default class RecipeItem extends Component {
+import {Recipe} from 'models/Recipe'
+
+interface OuterProps {
+  recipe: Recipe
+}
+
+export default class RecipeItem extends React.Component<OuterProps> {
   render() {
     const {recipe} = this.props;
 

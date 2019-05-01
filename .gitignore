@@ -56,3 +56,5 @@ buck-out/
 *.jsbundle
 
 __tests__/__snapshots__/
+
+.jest/

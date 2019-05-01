@@ -1,23 +1,36 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import { connect } from 'react-redux'; 
+import { NavigationScreenProp } from 'react-navigation';
 
-import {initApp} from '../actions/AppActions';
+import {initApp} from '../duck/actions';
 
-class SplashScreen extends Component {
+interface StateProps {
+  setPreferences: boolean
+}
+
+interface DispatchProps {
+  initApp: () => void
+}
+
+interface OuterProps {
+  navigation: NavigationScreenProp<any,any>
+}
+
+class SplashScreen extends React.Component<StateProps & DispatchProps & OuterProps> {
   componentDidMount() {
     this.props.initApp();
   }
 
   componentWillReceiveProps(newProps) {
-    if (this.props.firstLoad === undefined && newProps.firstLoad !== undefined) {
-      this.redirect(newProps.firstLoad);
+    if (this.props.setPreferences === undefined && newProps.setPreferences !== undefined) {
+      this.redirect(newProps.setPreferences);
     }
   }
 
-  redirect(firstLoad) {
+  redirect(setPreferences) {
     const {navigation} = this.props;
-    if (firstLoad) {
+    if (setPreferences) {
       //TODO: add preferences page
       //navigation.replace("Preferences");
       navigation.replace("Home");
@@ -27,9 +40,9 @@ class SplashScreen extends Component {
   }
 
   render() {
-    const {firstLoad} = this.props;
+    const {setPreferences} = this.props;
 
-    if (firstLoad === undefined) {
+    if (setPreferences === undefined) {
       return (
         <View style={styles.container}>
           <Text style={styles.splash}>Cook Book Splash Screen</Text>
@@ -43,7 +56,7 @@ class SplashScreen extends Component {
 
 const mapStateToProps = state => {
   return {
-    firstLoad: state.app.firstLoad
+    setPreferences: state.app.setPreferences
   };
 }
 

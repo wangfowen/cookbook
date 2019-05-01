@@ -1,4 +1,4 @@
-import {LOAD_RECIPES} from "../actions/RecipeActions";
+import {LOAD_RECIPES} from "./constants";
 
 const RecipesReducer = (state = [], action = {}) => {
   switch (action.type) {

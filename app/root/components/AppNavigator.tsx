@@ -1,6 +1,6 @@
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 
-import SplashScreen from '../containers/SplashScreen.js';
+import SplashScreen from './SplashScreen';
 import HomeNavigator from './HomeNavigator';
 import PreferencesScreen from './PreferencesScreen';
 

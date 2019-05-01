@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import AppReducer from './AppReducer';
-import RecipesReducer from './RecipesReducer';
+import AppReducer from 'root/duck/reducer';
+import RecipesReducer from 'recipes/data/reducer';
 
 const CombinedReducer = combineReducers({
   app: AppReducer,

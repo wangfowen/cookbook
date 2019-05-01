@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Text, View} from 'react-native';
 
-export default class PreferencesScreen extends Component {
+export default class LearnIndexScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Preferences!</Text>
+        <Text>Learn!</Text>
       </View>
     );
   }

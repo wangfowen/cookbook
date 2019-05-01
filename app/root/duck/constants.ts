@@ -1,0 +1,1 @@
+export const LOAD_SETTINGS = "LOAD_SETTINGS" as "LOAD_SETTINGS"

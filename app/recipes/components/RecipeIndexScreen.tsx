@@ -1,13 +1,17 @@
-import React, {Component} from 'react';
-import {StyleSheet, Text, FlatList, View} from 'react-native';
+import React from 'react'
+import {StyleSheet, Text, FlatList, View} from 'react-native'
+import { connect } from 'react-redux'
 
-import { connect } from 'react-redux'; 
+import RecipeItem from './RecipeItem'
+import {Recipe} from 'models/Recipe'
 
-import RecipeItem from '../components/RecipeItem';
+interface StateProps {
+  recipes: Recipe[]
+}
 
-class RecipeIndexScreen extends Component {
-  renderRecipe(item) {
-    return <RecipeItem recipe={item} />;
+class RecipeIndexScreen extends React.Component<StateProps> {
+  renderRecipe(item: Recipe) {
+    return <RecipeItem recipe={item} />
   }
 
   render() {

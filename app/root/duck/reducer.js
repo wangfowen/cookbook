@@ -1,7 +1,7 @@
-import {LOAD_SETTINGS} from "../actions/AppActions";
+import {LOAD_SETTINGS} from "./constants";
 
 const initialState = {
-  firstLoad: undefined,
+  setPreferences: undefined,
   preferences: {}
 };
 
@@ -10,7 +10,7 @@ const AppReducer = (state = initialState, action = {}) => {
     case LOAD_SETTINGS:
       return {
         ...state,
-        firstLoad: action.settings.isFirstLoad
+        setPreferences: action.settings.setPreferences
       };
     default:
       return state;
