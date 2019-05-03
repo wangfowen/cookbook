@@ -1,5 +1,5 @@
 import {LOAD_RECIPES} from './constants'
-import { Recipe } from 'models/Recipe';
+import { Recipe } from 'app/models/Recipe';
 
 export const loadRecipes = (recipes: Recipe[]) => {
   return {

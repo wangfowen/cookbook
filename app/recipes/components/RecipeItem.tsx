@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-import {Recipe} from 'models/Recipe'
+import {Recipe} from 'app/models/Recipe'
 
 interface OuterProps {
   recipe: Recipe
@@ -14,7 +14,7 @@ export default class RecipeItem extends React.Component<OuterProps> {
     return (
       <View style={styles.item}>
         <Text style={styles.title}>{recipe.title}</Text>
-        <Text style={styles.ingredients}>{recipe.ingredients}</Text>
+        <Text style={styles.heroImage}>{recipe.heroImage}</Text>
       </View>
     );
   }
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     height: 40
   },
-  ingredients: {
+  heroImage: {
     fontSize: 16
   }
 });

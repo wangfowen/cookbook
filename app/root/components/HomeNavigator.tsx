@@ -1,6 +1,6 @@
 import {createBottomTabNavigator} from 'react-navigation';
-import RecipeIndexScreen from 'recipes/components/RecipeIndexScreen';
-import LearnIndexScreen from 'learn/components/LearnIndexScreen';
+import RecipeIndexScreen from 'app/recipes/components/RecipeIndexScreen';
+import LearnIndexScreen from 'app/learn/components/LearnIndexScreen';
 
 const HomeNavigator = createBottomTabNavigator({
   Recipe: RecipeIndexScreen,

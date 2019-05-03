@@ -3,7 +3,7 @@ import {StyleSheet, Text, FlatList, View} from 'react-native'
 import { connect } from 'react-redux'
 
 import RecipeItem from './RecipeItem'
-import {Recipe} from 'models/Recipe'
+import {Recipe} from 'app/models/Recipe'
 
 interface StateProps {
   recipes: Recipe[]
@@ -11,7 +11,7 @@ interface StateProps {
 
 class RecipeIndexScreen extends React.Component<StateProps> {
   renderRecipe(item: Recipe) {
-    return <RecipeItem recipe={item} />
+    return <RecipeItem recipe={item} key={item.id} />
   }
 
   render() {

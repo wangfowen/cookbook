@@ -6,9 +6,8 @@ module.exports = function (api) {
     [
       require.resolve('babel-plugin-module-resolver'),
       {
-        root: ["./app"],
         alias: {
-          "test": "./__tests__"
+          "app": ["./app/"],
         }
       }
       

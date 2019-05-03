@@ -1,6 +1,6 @@
-import {SettingsModel} from 'models/Settings';
-import {RecipesModel} from 'models/Recipe';
-import {loadRecipes} from 'recipes/duck/actions';
+import {SettingsModel} from 'app/models/Settings';
+import {RecipesModel} from 'app/models/Recipe';
+import {loadRecipes} from 'app/recipes/duck/actions';
 import {LOAD_SETTINGS} from './constants'
 
 export const initApp = () => {
