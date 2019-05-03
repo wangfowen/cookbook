@@ -3,10 +3,10 @@ import RecipeIndexScreen from 'app/recipes/components/RecipeIndexScreen';
 import LearnIndexScreen from 'app/learn/components/LearnIndexScreen';
 
 const HomeNavigator = createBottomTabNavigator({
-  Recipe: RecipeIndexScreen,
-  Learn: LearnIndexScreen,
+  Recipes: {screen: RecipeIndexScreen},
+  Learn: {screen: LearnIndexScreen},
 }, {
-  initialRouteName: "Recipe"
+  initialRouteName: "Recipes"
 });
 
 export default HomeNavigator;

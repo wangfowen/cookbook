@@ -7,7 +7,8 @@ module.exports = function (api) {
       require.resolve('babel-plugin-module-resolver'),
       {
         alias: {
-          "app": ["./app/"],
+          "app": ["./app/src/"],
+          "media": ["./app/media/"],
         }
       }
       

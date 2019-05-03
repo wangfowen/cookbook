@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavigationScreenProp } from 'react-navigation';
 import {StyleSheet, Text, FlatList, View} from 'react-native'
 import { connect } from 'react-redux'
 
@@ -9,9 +10,22 @@ interface StateProps {
   recipes: Recipe[]
 }
 
-class RecipeIndexScreen extends React.Component<StateProps> {
+interface OuterProps {
+  navigation: NavigationScreenProp<any,any>
+}
+
+class RecipeIndexScreen extends React.Component<StateProps & OuterProps> {
+  navigateToRecipe(recipe: Recipe) {
+    this.props.navigation.navigate("Recipe", {recipe})
+  }
+
   renderRecipe(item: Recipe) {
-    return <RecipeItem recipe={item} key={item.id} />
+    return <RecipeItem recipe={item} onPress={() => this.navigateToRecipe(item) }/>
+  }
+
+  data() {
+    const data = this.props.recipes.map((recipe) => Object.assign({}, recipe, {key: recipe.id}))
+    return data
   }
 
   render() {
@@ -19,7 +33,7 @@ class RecipeIndexScreen extends React.Component<StateProps> {
       <View style={styles.recipes}>
         <Text style={styles.title}>Recipes</Text>
         <FlatList
-          data={this.props.recipes}
+          data={this.data()}
           renderItem={({item}) => this.renderRecipe(item)}
         />
       </View>
