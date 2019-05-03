@@ -7,8 +7,8 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 import {name as appName} from './app.json';
-import AppWithNavigation from './app/root/components/AppNavigator';
-import CombinedReducer from './app/root/duck/reducer/CombinedReducer';
+import AppWithNavigation from 'root/components/AppNavigator';
+import CombinedReducer from './app/CombinedReducer';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(CombinedReducer);

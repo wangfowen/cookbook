@@ -25,6 +25,7 @@
     "cacheDirectory": ".jest/cache"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.3.4",
     "react": "16.8.3",
     "react-native": "0.59.5",
     "react-native-gesture-handler": "^1.2.1",
@@ -46,6 +47,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-plugin-dynamic-import-node": "^2.2.0",
+    "babel-plugin-module-resolver": "^3.2.0",
     "jest": "23.6.0",
     "jest-transform-stub": "^2.0.0",
     "metro-react-native-babel-preset": "^0.51.1",

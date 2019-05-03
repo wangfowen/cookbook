@@ -1,16 +1,26 @@
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Model = {
   writeDb<T>(key: string, jsonData: T) {
-    return AsyncStorage.setItem(key, JSON.stringify(jsonData))
+    try {
+      return AsyncStorage.setItem(key, JSON.stringify(jsonData))
+    } catch (e) {
+      console.log(e)
+      return null
+    }
   },
 
   async readDb<T>(key: string): Promise<T | null> {
-    const data = await AsyncStorage.getItem(key);
-    if (data) {
-      return JSON.parse(data)
-    } 
-    return null
+    try {
+      const data = await AsyncStorage.getItem(key);
+      if (data) {
+        return JSON.parse(data)
+      } 
+      return null
+    } catch (e) {
+      console.log(e)
+      return null
+    }
   }
 }
 
