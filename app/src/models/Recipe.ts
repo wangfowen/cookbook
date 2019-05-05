@@ -23,6 +23,7 @@ export interface Recipe {
   id: string
   title: string
   heroImage: string
+  description: string
   ingredients: {
     main: RecipeComponent[]
     garnish: RecipeComponent[]
@@ -41,6 +42,24 @@ export interface Recipe {
 export interface Recipes {
   recipes: Recipe[]
   version: number
+}
+
+export const RecipesHelper = {
+  hourify(min: number) {
+    if (min >= 60) {
+      const hours = min / 60
+      const leftover = min % 60
+      return `${hours}h ${leftover}m`
+    } else {
+      return `${min}m`
+    }
+  },
+
+  componentAmount(i: RecipeComponent) {
+    const amount = i.amount ? i.amount + " " : ""
+    const size = i.size ? i.size + " " : ""
+    return `${amount}${size}${i.id}`
+  }
 }
 
 const KEY = "recipes"
@@ -64,6 +83,7 @@ export const RecipesModel = {
           id: "1",
           title: "Cacio e Pepe",
           heroImage: cacio,
+          description: "This is a classic and super simple pasta",
           ingredients: {
             main: [
               {
@@ -122,6 +142,7 @@ export const RecipesModel = {
           id: "2",
           title: "Avocado Egg",
           heroImage: avocadoEgg,
+          description: "A very basic breakfast",
           ingredients: {
             main: [
               {

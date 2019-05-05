@@ -1,22 +1,13 @@
 import React from 'react';
 import {StyleSheet, Text, ImageBackground, TouchableHighlight} from 'react-native';
 
-import {Recipe} from 'app/models/Recipe'
+import {Recipe, RecipesHelper} from 'app/models/Recipe'
 
 interface OuterProps {
   recipe: Recipe
   onPress: () => void
 }
 export default class RecipeItem extends React.Component<OuterProps> {
-  hourify(min: number) {
-    if (min >= 60) {
-      const hours = min / 60
-      const leftover = min % 60
-      return `${hours}h ${leftover}m`
-    } else {
-      return `${min}m`
-    }
-  }
 
   render() {
     const {recipe} = this.props;
@@ -24,8 +15,8 @@ export default class RecipeItem extends React.Component<OuterProps> {
     return (
       <TouchableHighlight onPress={this.props.onPress}>
         <ImageBackground source={{uri: recipe.heroImage}} style={styles.heroImage}>
-          <Text style={styles.text}>Prep: {this.hourify(recipe.prepMin)}</Text>
-          <Text style={styles.text}>Cook: {this.hourify(recipe.cookMin)}</Text>
+          <Text style={styles.text}>Prep: {RecipesHelper.hourify(recipe.prepMin)}</Text>
+          <Text style={styles.text}>Cook: {RecipesHelper.hourify(recipe.cookMin)}</Text>
           <Text style={[styles.text, styles.title]}>{recipe.title}</Text>
         </ImageBackground>
       </TouchableHighlight>
