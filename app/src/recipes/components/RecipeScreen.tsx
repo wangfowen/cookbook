@@ -2,10 +2,20 @@ import React from 'react';
 import { NavigationScreenProp } from 'react-navigation';
 import {StyleSheet, Text, View} from 'react-native';
 import { ButtonGroup } from 'react-native-elements';
+import { connect } from 'react-redux'
 
 import {Recipe} from 'app/models/Recipe'
 import RecipeOverview from './RecipeOverview';
 import RecipeSteps from '../RecipeSteps';
+import { ReduxState } from 'app/CombinedReducer';
+import { ComponentId } from 'app/models/common';
+import { Ingredient } from 'app/models/Ingredient';
+import { Tool } from 'app/models/Tool';
+
+interface StateProps {
+  ingredients: Map<ComponentId, Ingredient>
+  tools: Map<ComponentId, Tool>
+}
 
 interface OuterProps {
   navigation: NavigationScreenProp<any,any>
@@ -15,7 +25,7 @@ interface State {
   view: number
 }
 
-export default class RecipeScreen extends React.Component<OuterProps, State> {
+class RecipeScreen extends React.Component<OuterProps & StateProps, State> {
   constructor(props) {
     super(props)
 
@@ -28,6 +38,8 @@ export default class RecipeScreen extends React.Component<OuterProps, State> {
 
   render() {
     const recipe = this.getRecipe()
+    const {tools, ingredients} = this.props
+
     if (recipe) {
       return (
         <View>
@@ -39,7 +51,7 @@ export default class RecipeScreen extends React.Component<OuterProps, State> {
             containerStyle={styles.tabs}
           />
           {this.state.view === 0 ? 
-            <RecipeOverview recipe={recipe} /> : 
+            <RecipeOverview recipe={recipe} ingredients={ingredients} tools={tools} /> : 
             <RecipeSteps recipe={recipe} />
           }
         </View>
@@ -49,6 +61,15 @@ export default class RecipeScreen extends React.Component<OuterProps, State> {
     }
   }
 }
+
+const mapStateToProps = (state: ReduxState) => {
+  return {
+    ingredients: state.recipes.ingredients,
+    tools: state.recipes.tools
+  };
+}
+
+export default connect(mapStateToProps)(RecipeScreen);
 
 const styles = StyleSheet.create({
   title: {

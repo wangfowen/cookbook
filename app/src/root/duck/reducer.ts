@@ -1,11 +1,14 @@
-import {LOAD_SETTINGS} from "./constants";
+import {LOAD_SETTINGS, AppActionTypes} from "./types";
 
-const initialState = {
+interface AppState {
+  setPreferences: boolean | undefined
+}
+
+const initialState: AppState = {
   setPreferences: undefined,
-  preferences: {}
 };
 
-const AppReducer = (state = initialState, action = {}) => {
+const AppReducer = (state = initialState, action: AppActionTypes): AppState => {
   switch (action.type) {
     case LOAD_SETTINGS:
       return {

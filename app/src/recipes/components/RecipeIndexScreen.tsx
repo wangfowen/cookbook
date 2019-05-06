@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 import RecipeItem from './RecipeItem'
 import {Recipe} from 'app/models/Recipe'
+import { ReduxState } from 'app/CombinedReducer';
 
 interface StateProps {
   recipes: Recipe[]
@@ -41,9 +42,9 @@ class RecipeIndexScreen extends React.Component<StateProps & OuterProps> {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: ReduxState) => {
   return {
-    recipes: state.recipes
+    recipes: Array.from(state.recipes.recipes.values())
   };
 }
 

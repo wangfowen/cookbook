@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 
 import {initApp} from '../duck/actions';
+import { ReduxState } from 'app/CombinedReducer';
 
 interface StateProps {
   setPreferences: boolean
@@ -54,7 +55,7 @@ class SplashScreen extends React.Component<StateProps & DispatchProps & OuterPro
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: ReduxState) => {
   return {
     setPreferences: state.app.setPreferences
   };

@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
-const Model = {
+const DbHelper = {
   writeDb<T>(key: string, jsonData: T) {
     try {
       return AsyncStorage.setItem(key, JSON.stringify(jsonData))
@@ -24,4 +24,4 @@ const Model = {
   }
 }
 
-export default Model 
+export default DbHelper 

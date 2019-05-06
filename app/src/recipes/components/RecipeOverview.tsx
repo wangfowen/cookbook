@@ -1,25 +1,45 @@
 import React from 'react';
 import {StyleSheet, Text, View, SectionList} from 'react-native';
 
-import {Recipe, ComponentType, RecipesHelper} from 'app/models/Recipe'
+import {Recipe, ComponentType, RecipesHelper, RecipeComponent} from 'app/models/Recipe'
+import { ComponentId } from 'app/models/common';
+import { Ingredient } from 'app/models/Ingredient';
+import { Tool } from 'app/models/Tool';
 
 interface OuterProps {
   recipe: Recipe
+  ingredients: Map<ComponentId, Ingredient>
+  tools: Map<ComponentId, Tool>
 }
 export default class RecipeOverview extends React.Component<OuterProps> {
   getIngredients() {
-    //TODO: get the actual ingredient
-    const ingredientIds = Object.values(this.props.recipe.ingredients)
+    const components = Object.values(this.props.recipe.ingredients)
       .flat()
-      .filter((i) => i.type === ComponentType.Ingredient)
-      .map((i) => RecipesHelper.componentAmount(i))
+      .map((i) => this.props.recipe.components.get(i))
+      .filter(function(i): i is RecipeComponent {
+        return i !== undefined && i.type === ComponentType.Ingredient
+      })
 
-    return ingredientIds
+    return components.map((c) => {
+      const i = this.props.ingredients.get(c.id)
+      if (i) {
+        return RecipesHelper.componentDescriptor(c, i)
+      } else {
+        return null
+      }
+    })
   }
 
   getTools() {
-    //TODO: get the actual tools
     const toolIds = this.props.recipe.toolIds
+      .map((t) => {
+        const tool = this.props.tools.get(t)
+        if (tool) {
+          return tool.name
+        } else {
+          return null
+        }
+      })
 
     return toolIds
   }
