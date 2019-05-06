@@ -17,7 +17,7 @@ export const IngredientModel = {
         {
           id: "i3",
           name: "Black Pepper",
-          infoId: "Freshly ground is better"
+          infoId: "f2"
         },
         {
           id: "i4",

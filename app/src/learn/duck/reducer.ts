@@ -1,15 +1,21 @@
 import { LOAD_INFO, InfoActionTypes } from "./types";
 import { ComponentId, Version } from "app/models/common";
-import { Info } from "app/models/Info";
+import { Info, InfoId, LearnInfoIds } from "app/models/Info";
 
 interface InfoState {
-  infos: Map<ComponentId, Info>,
+  infos: Map<InfoId, Info>
   versions: Map<ComponentId, Version>
+  learnInfoIds: LearnInfoIds
 }
 
 const initialState: InfoState = {
   infos: new Map(),
-  versions: new Map()
+  versions: new Map(),
+  learnInfoIds: {
+    general: [],
+    ingredients: [],
+    tools: []
+  }
 }
 
 const InfoReducer = (state = initialState, action: InfoActionTypes): InfoState => {
@@ -27,7 +33,9 @@ const InfoReducer = (state = initialState, action: InfoActionTypes): InfoState =
       return {
         ...state, 
         infos,
-        versions
+        versions,
+        //TODO: merge instead of replace
+        learnInfoIds: action.learnInfoIds
       };
     default:
       return state;

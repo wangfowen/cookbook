@@ -15,7 +15,7 @@ export const initApp = () => {
       const dbInfos = await InfosModel.getInfos();
       if (dbInfos) {
         const infos = await InfosModel.mkMap(dbInfos.infos)
-        dispatch(loadInfo(infos, dbInfos.version, dbInfos.id))
+        dispatch(loadInfo(infos, dbInfos.version, dbInfos.id, dbInfos.learnInfoIds))
       }
       
       const tools = await ToolsModel.getAll() || [];

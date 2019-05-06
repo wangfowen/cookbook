@@ -56,7 +56,7 @@ export const RecipesModel = {
               size: "large",
               id: "i1",
               type: ComponentType.Ingredient,
-              customInfoId: "Use a ripe one"
+              customInfoId: "f1"
             }, 
             {
               amount: 0.5,
@@ -90,7 +90,7 @@ export const RecipesModel = {
             ],
             cook: [
               {
-                info: "Squeeze [lemon](Lemon) on [avocado](Sliced Avocado). Add {[salt](Salt) and [pepper](Black Pepper)}(1 -> salt and pepper to taste)",
+                info: "Squeeze [lemon](Lemon) on [avocado](Sliced Avocado). Add {[salt](Salt) and [pepper](Black Pepper)}(f3)",
                 output: "Fancy Avocado",
               }
             ]
@@ -107,7 +107,7 @@ export const RecipesModel = {
               size: "large",
               id: "i1",
               type: ComponentType.Ingredient,
-              customInfoId: "Use a ripe one"
+              customInfoId: "f1"
             }, 
             {
               amount: 0.5,

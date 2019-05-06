@@ -4,7 +4,7 @@ export type InfoId = ComponentId
 
 export interface Info extends Component {
   id: InfoId
-  title: string
+  title?: string
   content: string
   subInfoIds?: InfoId[]
   parentInfoIds?: InfoId[]
@@ -13,4 +13,10 @@ export interface Info extends Component {
 
 export interface InfoMeta extends Component {
   read: boolean
+}
+
+export interface LearnInfoIds {
+  general: InfoId[]
+  ingredients: InfoId[]
+  tools: InfoId[]
 }

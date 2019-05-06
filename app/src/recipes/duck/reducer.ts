@@ -1,13 +1,13 @@
 import { LOAD_RECIPES, RecipeActionTypes, LOAD_INGREDIENTS_TOOLS } from "./types";
-import { Recipe, RecipesHelper } from "app/models/Recipe";
-import { Ingredient } from "app/models/Ingredient";
-import { Tool } from "app/models/Tool";
+import { Recipe, RecipesHelper, RecipeId } from "app/models/Recipe";
+import { Ingredient, IngredientId } from "app/models/Ingredient";
+import { Tool, ToolId } from "app/models/Tool";
 import { ComponentId, Component, Version } from "app/models/common";
 
 interface RecipesState {
-  ingredients: Map<ComponentId, Ingredient>
-  tools: Map<ComponentId, Tool>
-  recipes: Map<ComponentId, Recipe>
+  ingredients: Map<IngredientId, Ingredient>
+  tools: Map<ToolId, Tool>
+  recipes: Map<RecipeId, Recipe>
   recipesVersions: Map<ComponentId, Version>
 }
 
@@ -38,6 +38,8 @@ const RecipesReducer = (state = initialState, action: RecipeActionTypes): Recipe
         const recipe = RecipesHelper.convertFromDb(dbRecipe) 
         recipes.set(recipe.id, recipe)
       })
+
+      //TODO: for each recipe, add its id to ingredients that use it
 
       return {...state, recipes: recipes, recipesVersions};
     case LOAD_INGREDIENTS_TOOLS:
