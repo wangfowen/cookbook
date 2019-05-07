@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Text, SectionList} from 'react-native';
 
 import {Recipe} from 'app/models/Recipe'
-import styles from './RecipeStyles'
+import styles from 'app/common/GlobalStyles'
 
 interface OuterProps {
   recipe: Recipe

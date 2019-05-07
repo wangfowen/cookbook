@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { ReduxState } from 'app/CombinedReducer';
 import {Recipe} from 'app/models/Recipe'
 import RecipeItem from './RecipeItem'
-import styles from './RecipeStyles'
+import styles from 'app/common/GlobalStyles'
 
 interface StateProps {
   recipes: Recipe[]

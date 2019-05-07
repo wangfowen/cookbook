@@ -6,7 +6,7 @@ import { ComponentId } from 'app/models/common';
 import { Ingredient } from 'app/models/Ingredient';
 import { Tool } from 'app/models/Tool';
 
-import styles from './RecipeStyles'
+import styles from 'app/common/GlobalStyles'
 import ComponentWithInfo from './ComponentWithInfo';
 
 interface OuterProps {

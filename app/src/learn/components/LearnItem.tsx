@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, TouchableHighlight} from 'react-native';
 
 import { Info } from 'app/models/Info';
+import styles from 'app/common/GlobalStyles'
 
 interface OuterProps {
   info: Info
@@ -14,21 +15,8 @@ export default class LearnItem extends React.Component<OuterProps> {
 
     return (
       <TouchableHighlight onPress={this.props.onPress}>
-        <Text style={[styles.text]}>{info.title}</Text>
+        <Text style={[styles.p]}>{info.title}</Text>
       </TouchableHighlight>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 20,
-    height: 40,
-  },
-  text: {
-    fontSize: 16,
-    height: 32,
-    color: '#111',
-    paddingRight: 10
-  },
-});

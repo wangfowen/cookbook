@@ -9,10 +9,10 @@ import { ReduxState } from 'app/CombinedReducer';
 import { ComponentId } from 'app/models/common';
 import { Ingredient } from 'app/models/Ingredient';
 import { Tool } from 'app/models/Tool';
+import styles from 'app/common/GlobalStyles'
 
 import RecipeOverview from './RecipeOverview';
 import RecipeSteps from './RecipeSteps';
-import styles from './RecipeStyles'
 
 interface StateProps {
   ingredients: Map<ComponentId, Ingredient>

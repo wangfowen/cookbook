@@ -5,7 +5,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import { ReduxState } from 'app/CombinedReducer';
 import { InfoId, Info } from 'app/models/Info';
-import styles from './RecipeStyles';
+import styles from 'app/common/GlobalStyles'
 import { markRead } from 'app/learn/duck/actions';
 
 interface OuterProps {

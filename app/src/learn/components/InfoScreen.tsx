@@ -3,6 +3,7 @@ import { NavigationScreenProp } from 'react-navigation';
 import {StyleSheet, Text, ScrollView} from 'react-native';
 
 import { Info } from 'app/models/Info';
+import styles from 'app/common/GlobalStyles'
 
 interface OuterProps {
   navigation: NavigationScreenProp<any,any>
@@ -18,9 +19,8 @@ export default class InfoScreen extends React.Component<OuterProps> {
 
     if (info) {
       return (
-        <ScrollView>
-          <Text>Info</Text>
-          <Text style={[styles.text]}>{info.content}</Text>
+        <ScrollView style={styles.wrapper}>
+          <Text style={[styles.p]}>{info.content}</Text>
         </ScrollView>
       );
     } else {
@@ -28,17 +28,3 @@ export default class InfoScreen extends React.Component<OuterProps> {
     }
   }
 }
-
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 20,
-    paddingTop: 10,
-    height: 40,
-    paddingLeft: 5
-  },
-  text: {
-    fontSize: 16,
-    color: '#111',
-    paddingRight: 10
-  },
-});

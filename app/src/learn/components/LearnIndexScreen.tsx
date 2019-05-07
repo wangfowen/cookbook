@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { ReduxState } from 'app/CombinedReducer';
 import LearnItem from './LearnItem';
 import { Info, InfoId, LearnInfoIds } from 'app/models/Info';
+import styles from 'app/common/GlobalStyles'
 
 interface StateProps {
   infos: Map<InfoId, Info>
@@ -28,12 +29,12 @@ class LearnIndexScreen extends React.Component<StateProps & OuterProps> {
 
   render() {
     return (
-      <View style={styles.info}>
-        <Text style={styles.title}>Learn!</Text>
+      <View style={[localStyles.info, styles.wrapper]}>
+        <Text style={styles.h1}>Learn!</Text>
         <SectionList
           renderItem={({item}) => <LearnItem info={item} onPress={() => this.navigateToInfo(item)}/>}
           renderSectionHeader={({section: {title}}) => (
-            <Text style={styles.header}>{title}</Text>
+            <Text style={styles.h3}>{title}</Text>
           )}
           sections={[
             {title: 'General', data: this.getInfo("general")},
@@ -56,7 +57,7 @@ const mapStateToProps = (state: ReduxState) => {
 
 export default connect(mapStateToProps)(LearnIndexScreen);
 
-const styles = StyleSheet.create({
+const localStyles = StyleSheet.create({
   title: {
     fontSize: 30
   },
