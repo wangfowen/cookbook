@@ -107,7 +107,7 @@ export const RecipesModel = {
               size: "large",
               id: "i1",
               type: ComponentType.Ingredient,
-              customInfoId: "f1"
+              customInfoId: "f4"
             }, 
             {
               amount: 0.5,

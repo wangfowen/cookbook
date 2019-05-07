@@ -1,16 +1,18 @@
 import React from 'react';
 import { NavigationScreenProp } from 'react-navigation';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, ScrollView} from 'react-native';
 import { ButtonGroup } from 'react-native-elements';
 import { connect } from 'react-redux'
 
 import {Recipe} from 'app/models/Recipe'
-import RecipeOverview from './RecipeOverview';
-import RecipeSteps from '../RecipeSteps';
 import { ReduxState } from 'app/CombinedReducer';
 import { ComponentId } from 'app/models/common';
 import { Ingredient } from 'app/models/Ingredient';
 import { Tool } from 'app/models/Tool';
+
+import RecipeOverview from './RecipeOverview';
+import RecipeSteps from './RecipeSteps';
+import styles from './RecipeStyles'
 
 interface StateProps {
   ingredients: Map<ComponentId, Ingredient>
@@ -42,19 +44,19 @@ class RecipeScreen extends React.Component<OuterProps & StateProps, State> {
 
     if (recipe) {
       return (
-        <View>
-          <Text style={[styles.text, styles.title]}>{recipe.title}</Text>
+        <ScrollView>
+          <Text style={[styles.p, styles.h2]}>{recipe.title}</Text>
           <ButtonGroup 
             onPress={(i) => {this.setState({view: i})}}
             selectedIndex={this.state.view}
             buttons={["Overview", "Steps"]}
-            containerStyle={styles.tabs}
+            containerStyle={localStyles.tabs}
           />
           {this.state.view === 0 ? 
             <RecipeOverview recipe={recipe} ingredients={ingredients} tools={tools} /> : 
             <RecipeSteps recipe={recipe} />
           }
-        </View>
+        </ScrollView>
       );
     } else {
       return null
@@ -71,19 +73,7 @@ const mapStateToProps = (state: ReduxState) => {
 
 export default connect(mapStateToProps)(RecipeScreen);
 
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 20,
-    paddingTop: 10,
-    height: 40,
-    paddingLeft: 5
-  },
-  text: {
-    fontSize: 16,
-    height: 32,
-    color: '#111',
-    paddingRight: 10
-  },
+const localStyles = StyleSheet.create({
   tabs: {
     width: "100%",
     marginLeft: 0

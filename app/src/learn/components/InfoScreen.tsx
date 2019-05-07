@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationScreenProp } from 'react-navigation';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, ScrollView} from 'react-native';
 
 import { Info } from 'app/models/Info';
 
@@ -17,12 +17,11 @@ export default class InfoScreen extends React.Component<OuterProps> {
     const info = this.getInfo()
 
     if (info) {
-      console.log(info.content)
       return (
-        <View>
+        <ScrollView>
           <Text>Info</Text>
           <Text style={[styles.text]}>{info.content}</Text>
-        </View>
+        </ScrollView>
       );
     } else {
       return null

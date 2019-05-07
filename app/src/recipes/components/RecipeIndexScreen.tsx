@@ -3,9 +3,10 @@ import { NavigationScreenProp } from 'react-navigation';
 import {StyleSheet, Text, FlatList, View} from 'react-native'
 import { connect } from 'react-redux'
 
-import RecipeItem from './RecipeItem'
-import {Recipe} from 'app/models/Recipe'
 import { ReduxState } from 'app/CombinedReducer';
+import {Recipe} from 'app/models/Recipe'
+import RecipeItem from './RecipeItem'
+import styles from './RecipeStyles'
 
 interface StateProps {
   recipes: Recipe[]
@@ -31,8 +32,8 @@ class RecipeIndexScreen extends React.Component<StateProps & OuterProps> {
 
   render() {
     return (
-      <View style={styles.recipes}>
-        <Text style={styles.title}>Recipes</Text>
+      <View style={localStyles.recipes}>
+        <Text style={styles.h1}>Recipes</Text>
         <FlatList
           data={this.data()}
           renderItem={({item}) => this.renderRecipe(item)}
@@ -50,10 +51,7 @@ const mapStateToProps = (state: ReduxState) => {
 
 export default connect(mapStateToProps)(RecipeIndexScreen);
 
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 30
-  },
+const localStyles = StyleSheet.create({
   recipes: {
     flex: 1,
     paddingTop: 20,

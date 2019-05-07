@@ -6,6 +6,9 @@ import { ComponentId } from 'app/models/common';
 import { Ingredient } from 'app/models/Ingredient';
 import { Tool } from 'app/models/Tool';
 
+import styles from './RecipeStyles'
+import ComponentWithInfo from './ComponentWithInfo';
+
 interface OuterProps {
   recipe: Recipe
   ingredients: Map<ComponentId, Ingredient>
@@ -23,7 +26,10 @@ export default class RecipeOverview extends React.Component<OuterProps> {
     return components.map((c) => {
       const i = this.props.ingredients.get(c.id)
       if (i) {
-        return RecipesHelper.componentDescriptor(c, i)
+        return {
+          text: RecipesHelper.componentDescriptor(c, i),
+          infoIds: [i.infoId, c.customInfoId].filter((id) => id)
+        }
       } else {
         return null
       }
@@ -35,7 +41,10 @@ export default class RecipeOverview extends React.Component<OuterProps> {
       .map((t) => {
         const tool = this.props.tools.get(t)
         if (tool) {
-          return tool.name
+          return {
+            text: tool.name,
+            infoIds: [tool.infoId].filter((id) => id)
+          }
         } else {
           return null
         }
@@ -46,9 +55,9 @@ export default class RecipeOverview extends React.Component<OuterProps> {
 
   renderIngredientsTools() {
     return <SectionList
-      renderItem={({item, index, section}) => <Text key={index}>{item}</Text>}
+      renderItem={({item, index, section}) => <ComponentWithInfo key={index} text={item.text} infoIds={item.infoIds} />}
       renderSectionHeader={({section: {title}}) => (
-        <Text style={styles.header}>{title}</Text>
+        <Text style={styles.h3}>{title}</Text>
       )}
       sections={[
         {title: 'Ingredients', data: this.getIngredients()},
@@ -62,19 +71,19 @@ export default class RecipeOverview extends React.Component<OuterProps> {
     const {recipe} = this.props;
 
     return (
-      <View>
-        <Text>{recipe.description}</Text>
-        <Text>What you'll need:</Text>
+      <View style={styles.wrapper}>
+        <Text style={[localStyles.description, styles.p]}>{recipe.description}</Text>
+        <Text style={styles.p}>What you'll need:</Text>
         {this.renderIngredientsTools()}
-        <Text>Prep time: {RecipesHelper.hourify(recipe.prepMin)}</Text>
-        <Text>Cook time: {RecipesHelper.hourify(recipe.cookMin)}</Text>
+        <Text style={styles.p}>Prep time: {RecipesHelper.hourify(recipe.prepMin)}</Text>
+        <Text style={styles.p}>Cook time: {RecipesHelper.hourify(recipe.cookMin)}</Text>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  header: {
-    fontWeight: 'bold'
-  }
+const localStyles = StyleSheet.create({
+  description: {
+    marginBottom: 10
+  },
 });
