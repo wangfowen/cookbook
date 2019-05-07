@@ -32,7 +32,7 @@ class RecipeIndexScreen extends React.Component<StateProps & OuterProps> {
 
   render() {
     return (
-      <View style={localStyles.recipes}>
+      <View style={[localStyles.recipes, styles.wrapper]}>
         <Text style={styles.h1}>Recipes</Text>
         <FlatList
           data={this.data()}
@@ -54,6 +54,5 @@ export default connect(mapStateToProps)(RecipeIndexScreen);
 const localStyles = StyleSheet.create({
   recipes: {
     flex: 1,
-    paddingTop: 20,
   }
 });

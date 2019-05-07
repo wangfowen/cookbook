@@ -24,6 +24,8 @@ export default class RecipeItem extends React.Component<OuterProps> {
   }
 }
 
+//TODO: add how many ingredients
+//TODO: image is a bit greyed out instead of shadow on text
 const styles = StyleSheet.create({
   title: {
     fontSize: 20,

@@ -38,6 +38,8 @@ class RecipeScreen extends React.Component<OuterProps & StateProps, State> {
     return this.props.navigation.getParam("recipe", null)
   }
 
+  //TODO: full image of photo, title below it, but once you scroll far enough up that's gone
+  //only comes up if you scroll back to top
   render() {
     const recipe = this.getRecipe()
     const {tools, ingredients} = this.props

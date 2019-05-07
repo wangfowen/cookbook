@@ -57,7 +57,7 @@ export default class RecipeOverview extends React.Component<OuterProps> {
     return <SectionList
       renderItem={({item, index, section}) => <ComponentWithInfo key={index} text={item.text} infoIds={item.infoIds} />}
       renderSectionHeader={({section: {title}}) => (
-        <Text style={styles.h3}>{title}</Text>
+        <Text style={[styles.h3, localStyles.header]}>{title}</Text>
       )}
       sections={[
         {title: 'Ingredients', data: this.getIngredients()},
@@ -70,13 +70,17 @@ export default class RecipeOverview extends React.Component<OuterProps> {
   render() {
     const {recipe} = this.props;
 
+    //TODO(future): add in ability to adjust the servings
+    //TODO(future): add "add to shopping list"
+    //TODO(future): add in schedule prep/eat time
     return (
       <View style={styles.wrapper}>
         <Text style={[localStyles.description, styles.p]}>{recipe.description}</Text>
-        <Text style={styles.p}>What you'll need:</Text>
+        <View style={localStyles.times}>
+          <Text style={[styles.p, localStyles.time]}>Prep time: {RecipesHelper.hourify(recipe.prepMin)}</Text>
+          <Text style={[styles.p, localStyles.time]}>Cook time: {RecipesHelper.hourify(recipe.cookMin)}</Text>
+        </View>
         {this.renderIngredientsTools()}
-        <Text style={styles.p}>Prep time: {RecipesHelper.hourify(recipe.prepMin)}</Text>
-        <Text style={styles.p}>Cook time: {RecipesHelper.hourify(recipe.cookMin)}</Text>
       </View>
     );
   }
@@ -86,4 +90,15 @@ const localStyles = StyleSheet.create({
   description: {
     marginBottom: 10
   },
+  header: {
+    marginTop: 15
+  },
+  time: {
+    marginRight: 10
+  },
+  times: {
+    flex: 1,
+    flexDirection: "row",
+    marginBottom: 10
+  }
 });

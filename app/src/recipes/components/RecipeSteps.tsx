@@ -15,6 +15,10 @@ export default class RecipeSteps extends React.Component<OuterProps> {
     return steps.map((s) => s.info)
   }
 
+  //TODO: click one of the ingredient inputs, shows popup of how much you need -- show up as underline
+  //TODO(future): add a picture of the ingredient in the popup?
+  //TODO: click on the extra info, shows popup of the info -- show up with lightbulb
+  //TODO: click one of the prior step inputs, scrolls up and highlights that step -- show up as underline
   render() {
     return <View style={styles.wrapper}>
       <SectionList

@@ -66,6 +66,5 @@ const localStyles = StyleSheet.create({
   },
   info: {
     flex: 1,
-    paddingTop: 20,
   }
 });
