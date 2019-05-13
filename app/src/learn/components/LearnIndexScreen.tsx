@@ -19,7 +19,7 @@ interface OuterProps {
 
 class LearnIndexScreen extends React.Component<StateProps & OuterProps> {
   navigateToInfo(info: Info) {
-    this.props.navigation.navigate("Info", {info})
+    this.props.navigation.navigate("Info", {infos: [info]})
   }
 
   getInfo(category: string) {
@@ -34,7 +34,7 @@ class LearnIndexScreen extends React.Component<StateProps & OuterProps> {
         <SectionList
           renderItem={({item}) => <LearnItem info={item} onPress={() => this.navigateToInfo(item)}/>}
           renderSectionHeader={({section: {title}}) => (
-            <Text style={styles.h3}>{title}</Text>
+            <Text style={[styles.h3, localStyles.section]}>{title}</Text>
           )}
           sections={[
             {title: 'General', data: this.getInfo("general")},
@@ -58,13 +58,10 @@ const mapStateToProps = (state: ReduxState) => {
 export default connect(mapStateToProps)(LearnIndexScreen);
 
 const localStyles = StyleSheet.create({
-  title: {
-    fontSize: 30
-  },
-  header: {
-    fontWeight: 'bold'
-  },
   info: {
     flex: 1,
+  },
+  section: {
+    marginTop: 15
   }
 });

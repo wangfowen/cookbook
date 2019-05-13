@@ -30,8 +30,7 @@ class ComponentWithInfo extends React.Component<OuterProps & StateProps & Dispat
   }
 
   popupInfo(infos: Info[]) {
-    //TODO: concat info?
-    this.props.navigation.navigate("Info", {info: infos[0]})
+    this.props.navigation.navigate("Info", {infos: infos})
 
     this.markRead(infos)
   }

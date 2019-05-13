@@ -8,11 +8,11 @@ import LearnIndexScreen from 'app/learn/components/LearnIndexScreen';
 
 const localStyles = StyleSheet.create({
   tabLabel: {
-    fontSize: 16,
+    fontSize: 12,
   },
   icon: {
     color: "#ccc",
-    fontSize: 18
+    fontSize: 20
   }
 });
 
