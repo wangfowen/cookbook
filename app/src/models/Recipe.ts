@@ -64,9 +64,9 @@ export const RecipesHelper = {
     if (min >= 60) {
       const hours = min / 60
       const leftover = min % 60
-      return `${hours}h ${leftover}m`
+      return `${hours} hr ${leftover} min`
     } else {
-      return `${min}m`
+      return `${min} min`
     }
   },
 

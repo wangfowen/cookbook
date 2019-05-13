@@ -20,8 +20,8 @@ export default class RecipeItem extends React.Component<OuterProps> {
         <ImageBackground source={{uri: recipe.heroImage}} style={styles.heroImage}>
           <View style={styles.container}>
             <Text style={styles.text}>{this.calcIngredients(recipe.ingredients)} ingredients</Text>
-            <Text style={styles.text}>Prep: {RecipesHelper.hourify(recipe.prepMin)}</Text>
-            <Text style={styles.text}>Cook: {RecipesHelper.hourify(recipe.cookMin)}</Text>
+            <Text style={styles.text}>{RecipesHelper.hourify(recipe.prepMin)} prep</Text>
+            <Text style={styles.text}>{RecipesHelper.hourify(recipe.cookMin)} cook</Text>
             <Text style={[styles.text, styles.title]}>{recipe.title}</Text>
           </View>
         </ImageBackground>
