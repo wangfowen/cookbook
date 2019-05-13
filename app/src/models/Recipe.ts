@@ -11,7 +11,7 @@ export type RecipeComponentId = RecipeId | IngredientId | UnfinishedId
 export interface UnfinishedComponent extends Component {
   id: UnfinishedId
   name: string
-  //TODO: errors if it's ComponentType.Unfinished, but the other one doesn't fail
+  //TODO(improve): errors if it's ComponentType.Unfinished, but the other one doesn't fail
   type: ComponentType
 }
 
@@ -23,7 +23,7 @@ export interface RecipeComponent extends Component {
   customInfoId?: InfoId
 }
 
-//TODO: naming is hard
+//TODO(improve): naming is hard
 export type InclusiveComponent = UnfinishedComponent | RecipeComponent
 
 export interface Step {

@@ -32,7 +32,7 @@ class SplashScreen extends React.Component<StateProps & DispatchProps & OuterPro
   redirect(setPreferences) {
     const {navigation} = this.props;
     if (setPreferences) {
-      //TODO: add preferences page
+      //TODO(future): add preferences page
       //navigation.replace("Preferences");
       navigation.replace("Home");
     } else {

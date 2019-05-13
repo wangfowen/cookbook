@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, ImageBackground, TouchableHighlight} from 'react-native';
+import {StyleSheet, Text, View, ImageBackground, TouchableHighlight} from 'react-native';
 
 import {Recipe, RecipesHelper} from 'app/models/Recipe'
 
@@ -8,6 +8,9 @@ interface OuterProps {
   onPress: () => void
 }
 export default class RecipeItem extends React.Component<OuterProps> {
+  calcIngredients(ingredients: object) {
+    return Object.values(ingredients).flat().length
+  }
 
   render() {
     const {recipe} = this.props;
@@ -15,17 +18,18 @@ export default class RecipeItem extends React.Component<OuterProps> {
     return (
       <TouchableHighlight onPress={this.props.onPress}>
         <ImageBackground source={{uri: recipe.heroImage}} style={styles.heroImage}>
-          <Text style={styles.text}>Prep: {RecipesHelper.hourify(recipe.prepMin)}</Text>
-          <Text style={styles.text}>Cook: {RecipesHelper.hourify(recipe.cookMin)}</Text>
-          <Text style={[styles.text, styles.title]}>{recipe.title}</Text>
+          <View style={styles.container}>
+            <Text style={styles.text}>{this.calcIngredients(recipe.ingredients)} ingredients</Text>
+            <Text style={styles.text}>Prep: {RecipesHelper.hourify(recipe.prepMin)}</Text>
+            <Text style={styles.text}>Cook: {RecipesHelper.hourify(recipe.cookMin)}</Text>
+            <Text style={[styles.text, styles.title]}>{recipe.title}</Text>
+          </View>
         </ImageBackground>
       </TouchableHighlight>
     );
   }
 }
 
-//TODO: add how many ingredients
-//TODO: image is a bit greyed out instead of shadow on text
 const styles = StyleSheet.create({
   title: {
     fontSize: 20,
@@ -34,19 +38,19 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     height: 32,
-    color: '#eee',
-    textShadowColor: '#111',
-    textShadowOffset: {width: 1, height: 1},
-    textShadowRadius: 1,
+    color: '#ccc',
     paddingRight: 10
   },
   heroImage: {
-    backgroundColor:'transparent',
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
     flex: 1,
     width: undefined,
     height: 200,
     resizeMode: 'cover'
+  },
+  container: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,.4)',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
   }
 });

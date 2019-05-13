@@ -33,7 +33,7 @@ const InfoReducer = (state = initialState, action: InfoActionTypes): InfoState =
         ...state, 
         infos,
         versions,
-        //TODO: merge instead of replace
+        //TODO(future): when add more modules, merge instead of replace
         learnInfoIds: action.learnInfoIds
       };
 

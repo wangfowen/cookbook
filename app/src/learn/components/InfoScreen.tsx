@@ -14,6 +14,8 @@ export default class InfoScreen extends React.Component<OuterProps> {
     return this.props.navigation.getParam("info", null)
   }
 
+  //TODO: how download media content to device? and then how reference them dynamically? saving as string is not great
+  //TODO: parse info - images, line breaks, videos
   render() {
     const info = this.getInfo()
 

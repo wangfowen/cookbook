@@ -53,7 +53,7 @@ export const RecipesModel = {
           components: [
             {
               amount: 1,
-              size: "large",
+              size: "very very super large",
               id: "i1",
               type: ComponentType.Ingredient,
               customInfoId: "f1"

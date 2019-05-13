@@ -1,5 +1,5 @@
 import DbHelper from './DbHelper';
-import { InfoMeta, Info, InfoId, LearnInfoIds } from 'app/models/Info';
+import { InfoMeta, Info, InfoId, LearnInfoIds} from 'app/models/Info';
 import { Component, ComponentId, Version } from 'app/models/common';
 
 /*
@@ -27,7 +27,7 @@ const META_KEY = "metas"
 const metaKey = (id: string) => `${META_KEY}_${id}`
 
 export const InfosModel = {
-  //TODO: this is probably not the best way to do this... a lot of db reads
+  //TODO(improve): convert InfoMeta to a map? less db reads here
   //TODO: test this
   async mkMap(infos: DbInfo[]) {
     const infoMap = new Map<ComponentId, Info>()
@@ -89,14 +89,14 @@ export const InfosModel = {
         infos: [
           {
             id: "f1",
-            content: "Use a ripe one"
+            content: "Use a ripe one",
           }, {
             id: "f2",
-            content: "Freshly ground is better"
+            content: "Freshly ground is better",
           },
           {
             id: "f3",
-            content: "salt and pepper to taste"
+            content: "salt and pepper to taste",
           },
           {
             id: "f4",

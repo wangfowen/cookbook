@@ -1,7 +1,9 @@
 import React from 'react';
 import {StyleSheet, View, Text, TouchableHighlight} from 'react-native';
+import { Tooltip } from 'react-native-elements';
 import { connect } from 'react-redux'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { withNavigation, NavigationScreenProp } from 'react-navigation';
 
 import { ReduxState } from 'app/CombinedReducer';
 import { InfoId, Info } from 'app/models/Info';
@@ -11,6 +13,7 @@ import { markRead } from 'app/learn/duck/actions';
 interface OuterProps {
   text: string
   infoIds: InfoId[]
+  navigation: NavigationScreenProp<any,any>
 }
 
 interface StateProps {
@@ -22,21 +25,35 @@ interface DispatchProps {
 }
 
 class ComponentWithInfo extends React.Component<OuterProps & StateProps & DispatchProps> {
-  popupInfo(infos: Info[]) {
-    //TODO: popup info - small box appear above. if longer than X, then has a show more to click and show more
-
+  markRead(infos: Info[]) {
     this.props.markRead(infos)
+  }
+
+  popupInfo(infos: Info[]) {
+    //TODO: concat info?
+    this.props.navigation.navigate("Info", {info: infos[0]})
+
+    this.markRead(infos)
   }
 
   renderInfo(infos: Info[]) {
     if (infos.length > 0) {
-      const allRead = infos
-        .map((i) => i.meta && i.meta.read)
-        .reduce((prev, curr) => { return prev && curr}, true)
+      //just one short tip
+      if (infos.length === 1 && infos[0].content.length < 35) {
+        const info = infos[0]
+        return <Tooltip withOverlay={false} popover={<Text>{info.content}</Text>} onOpen={() => this.markRead(infos)} width={40 + (info.content.length * 6)}>
+          <FontAwesome5 name="lightbulb" style={localStyles.icon} solid={info.meta && info.meta.read} />
+        </Tooltip>
+      //long tip. open another page
+      } else {
+        const allRead = infos
+          .map((i) => i.meta && i.meta.read)
+          .reduce((prev, curr) => { return prev && curr}, true)
 
-      return <TouchableHighlight onPress={() => this.popupInfo(infos)}>
-        <FontAwesome5 name="lightbulb" style={localStyles.icon} solid={allRead} />
-      </TouchableHighlight>
+        return <TouchableHighlight onPress={() => this.popupInfo(infos)}>
+          <FontAwesome5 name="lightbulb" style={localStyles.icon} solid={allRead} />
+        </TouchableHighlight>
+      }
     } else {
       return null
     }
@@ -75,4 +92,4 @@ const mapStateToProps = (state: ReduxState) => {
   };
 }
 
-export default connect(mapStateToProps, {markRead})(ComponentWithInfo);
+export default connect(mapStateToProps, {markRead})(withNavigation(ComponentWithInfo));
