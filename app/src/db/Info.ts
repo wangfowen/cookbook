@@ -93,6 +93,7 @@ export const InfosModel = {
           }, {
             id: "f2",
             content: "Freshly ground is better",
+            subInfoIds: ["f4"]
           },
           {
             id: "f3",
@@ -101,6 +102,7 @@ export const InfosModel = {
           {
             id: "f4",
             title: "Food Storage",
+            subInfoIds: ["f3"],
             content: `How does food go bad?
 Exposure to bacteria - breaks down the food. Higher temperature leads to more bacteria up til a certain temp, at which point they die. Fastest growth at 40F-140F (room temperature is 70F). Bacteria is everywhere, so as long as your food is exposed + there's oxygen for it to breathe + water for it to drink, bacteria will grow.
 Exposure to air - oxidation causes fats to go rancid (oxygen bonds to fats), which makes it taste bad

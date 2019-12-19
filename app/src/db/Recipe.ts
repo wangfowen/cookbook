@@ -84,13 +84,13 @@ export const RecipesModel = {
           steps: {
             prep: [
               {
-                info: "Cut [avocado](Avocado), remove core, cut into slices",
+                info: "Cut [avocado]{i: i1}, remove core, cut into slices",
                 output: "Sliced Avocado",
               }
             ],
             cook: [
               {
-                info: "Squeeze [lemon](Lemon) on [avocado](Sliced Avocado). Add {[salt](Salt) and [pepper](Black Pepper)}(f3)",
+                info: "Squeeze [lemon]{i: i2} on [avocado]{u: Sliced Avocado}. Add [[salt]{i: i3} and [pepper]{i: i4}]{f: f3}",
                 output: "Fancy Avocado",
               }
             ]
@@ -135,13 +135,13 @@ export const RecipesModel = {
           steps: {
             prep: [
               {
-                info: "Cut [avocado](Avocado), remove core, cut into slices",
+                info: "Cut [avocado]{i: i1}, remove core, cut into slices",
                 output: "Sliced Avocado",
               }
             ],
             cook: [
               {
-                info: "Squeeze [lemon](Lemon) on [avocado](Sliced Avocado). Add {[salt](Salt) and [pepper](Black Pepper)}(1 -> salt and pepper to taste)",
+                info: "Squeeze [lemon]{i: i2} on [avocado]{u: Sliced Avocado}. Add [[salt]{i: i3} and [pepper]{i: i4}]{f: f3}",
                 output: "Fancy Avocado",
               }
             ]

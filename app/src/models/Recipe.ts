@@ -26,9 +26,12 @@ export interface RecipeComponent extends Component {
 //TODO(improve): naming is hard
 export type InclusiveComponent = UnfinishedComponent | RecipeComponent
 
+export type StepInfo = string
+
 export interface Step {
-  inputIds: RecipeComponentId[]
-  info: string
+  //inputIds: RecipeComponentId[]
+//TODO: step info is an array of tokens
+  tokenizedInfo: StepInfo
   outputId: UnfinishedId
 }
 
@@ -60,6 +63,10 @@ export enum ComponentType {
 }
 
 export const RecipesHelper = {
+  allStepUnfinishedRegex: /\]\{u: [A-Za-z\s]+\}/g,
+  stepUnfinishedStrRegex: /\]\{u: ([A-Za-z\s]+)\}/,
+  allStepInputIdRegex: /\]\{[i|u|r]: ([i|u|r][0-9]+)\}/g,
+  stepInputIdRegex: /\]\{[i|u|r]: ([i|u|r][0-9]+)\}/,
   hourify(min: number) {
     if (min >= 60) {
       const hours = min / 60
@@ -85,15 +92,16 @@ export const RecipesHelper = {
     })
 
     let i = 1
+    const unfinished = {}
     const convertStep = (dbStep: DbStep) => {
       /*
         - assign an id for output
-        - TODO: turn text's inputs into inputIds
+        - override mentions of output with outputId instead
       */
-      const step = {
+      const step: Step = {
         outputId: `u${i}`,
-        info: dbStep.info,
-        inputIds: ["i1"]
+        tokenizedInfo: dbStep.info,
+        //inputIds: []
       }
       const component = {
         id: step.outputId,
@@ -101,7 +109,35 @@ export const RecipesHelper = {
         type: ComponentType.Unfinished
       }
       components.set(component.id, component)
+      unfinished[dbStep.output] = component.id
       i += 1
+
+      //TODO: tokenize. replace outputs with outputId in tokenization
+      //look for outputs mentioned, replace with outputId
+      const unfinishedMatches = step.tokenizedInfo.match(RecipesHelper.allStepUnfinishedRegex)
+      if (unfinishedMatches) {
+        unfinishedMatches.forEach((match) => {
+          const str = match.match(RecipesHelper.stepUnfinishedStrRegex)
+          if (str && str[1]) {
+            const newStr = match.replace(str[1], unfinished[str[1]])
+            step.tokenizedInfo = step.tokenizedInfo.replace(match, newStr)
+          }
+        })
+      }
+
+      /*
+      don't seem to actually need this?
+      //look for inputs mentioned, add to inputIds
+      const matches = step.info.match(RecipesHelper.allStepInputIdRegex)
+      if (matches) {
+        matches.forEach((match) => {
+          const id = match.match(RecipesHelper.stepInputIdRegex)
+          if (id && id[1]) {
+            step.inputIds = step.inputIds.concat(id[1])
+          }
+        })
+      }
+      */
 
       return step
     }

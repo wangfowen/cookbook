@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 
+//TODO: align color scheme
 const styles = StyleSheet.create({
   wrapper: {
     padding: 8

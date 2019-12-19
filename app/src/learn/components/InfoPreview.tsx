@@ -1,33 +1,38 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import { withNavigation, NavigationScreenProp } from 'react-navigation';
 
 import { Info } from 'app/models/Info';
 import styles from 'app/common/GlobalStyles'
 
 interface OuterProps {
   info: Info
-  onPress: () => void
+  navigation: NavigationScreenProp<any,any>
 }
-export default class LearnItem extends React.Component<OuterProps> {
+class InfoPreview extends React.Component<OuterProps> {
   shorten(text: string) {
     if (text.length < 50) {
       return text
     } else {
-      //TODO: trim out meta data once add that in
+      //TODO: render markdown after strip stuff out. custom style on markdown to have all font size same
       return text.slice(0, 47).replace("\n", " ").concat("...")
     }
   }
 
-  //TODO: indicate if this has been read 
+  navigateToInfo(info: Info) {
+    this.props.navigation.push("Info", {infos: [info]})
+  }
+
+  //TODO: indicate if this has been read - here, read is if it and all children are read
   render() {
     const {info} = this.props;
+    const title = info.title ? <Text style={[styles.p]}>{info.title}</Text> : null
     return (
-      <TouchableHighlight onPress={this.props.onPress}>
+      <TouchableHighlight onPress={() => this.navigateToInfo(info)}>
         <View style={localStyles.row}>
           <View style={localStyles.text}>
-            <Text style={[styles.p]}>{info.title}</Text>
+            {title} 
             <Text style={[styles.p, localStyles.subtext]}>{this.shorten(info.content)}</Text>
           </View>
           <View style={localStyles.iconView}>
@@ -38,6 +43,8 @@ export default class LearnItem extends React.Component<OuterProps> {
     );
   }
 }
+
+export default withNavigation(InfoPreview)
 
 const localStyles = StyleSheet.create({
   row: {

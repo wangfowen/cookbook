@@ -38,12 +38,13 @@ class ComponentWithInfo extends React.Component<OuterProps & StateProps & Dispat
   renderInfo(infos: Info[]) {
     if (infos.length > 0) {
       //just one short tip
-      if (infos.length === 1 && infos[0].content.length < 35) {
+      if (infos.length === 1 && infos[0].content.length < 35 && 
+        (!infos[0].subInfoIds || infos[0].subInfoIds.length === 0)) {
         const info = infos[0]
         return <Tooltip withOverlay={false} popover={<Text>{info.content}</Text>} onOpen={() => this.markRead(infos)} width={40 + (info.content.length * 6)}>
           <FontAwesome5 name="lightbulb" style={localStyles.icon} solid={info.meta && info.meta.read} />
         </Tooltip>
-      //long tip. open another page
+      //more going on. open another page
       } else {
         const allRead = infos
           .map((i) => i.meta && i.meta.read)

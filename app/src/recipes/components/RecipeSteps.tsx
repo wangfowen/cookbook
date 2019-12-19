@@ -1,34 +1,39 @@
 import React from 'react';
 import {StyleSheet, View, Text, SectionList} from 'react-native';
 
-import {Recipe} from 'app/models/Recipe'
+import {Recipe, Step} from 'app/models/Recipe'
 import styles from 'app/common/GlobalStyles'
 
 interface OuterProps {
   recipe: Recipe
 }
 export default class RecipeSteps extends React.Component<OuterProps> {
-  getSteps(category: "prep" | "cook") {
-    const steps = this.props.recipe.steps[category]
-
-    //TODO: parse info
-    return steps.map((s) => s.info)
+  //TODO: handle tokenized info
+  /*
+  [lemon](i2) on [avocado](u1). Add {[salt](i3) and [pepper](Pepper)}(f3)
+  //TODO: click one of the ingredient inputs, shows popup of how much you need -- show up as underline - reference components map for data to populate
+  //TODO: click on the extra info, shows popup of the info -- show up with lightbulb -- reference infos map for data to populate
+  //TODO: click one of the prior step inputs, scrolls up and highlights that step -- show up as underline - can do this with refs based on outputId
+  */
+  renderStep(step: Step, index: number) {
+    return <Text style={styles.p} key={index}>{step.tokenizedInfo}</Text>
   }
 
-  //TODO: click one of the ingredient inputs, shows popup of how much you need -- show up as underline
   //TODO(future): add a picture of the ingredient in the popup?
-  //TODO: click on the extra info, shows popup of the info -- show up with lightbulb
-  //TODO: click one of the prior step inputs, scrolls up and highlights that step -- show up as underline
   render() {
     return <View style={styles.wrapper}>
       <SectionList
-        renderItem={({item, index, section}) => <Text style={styles.p} key={index}>{item}</Text>}
-        renderSectionHeader={({section: {title}}) => (
-          <Text style={styles.h3}>{title}</Text>
-        )}
+        renderItem={({item, index, section}) => this.renderStep(item, index)}
+        renderSectionHeader={({section: {title, data}}) => {
+          if (data.length > 0) {
+            return <Text style={styles.h3}>{title}</Text>
+          } else {
+            return null
+          }
+        }}
         sections={[
-          {title: 'Prep', data: this.getSteps("prep")},
-          {title: 'Cook', data: this.getSteps("cook")},
+          {title: 'Prep', data: this.props.recipe.steps["prep"]},
+          {title: 'Cook', data: this.props.recipe.steps["cook"]},
         ]}
         keyExtractor={(item, index) => item + index}
       />

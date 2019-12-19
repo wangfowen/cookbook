@@ -1,10 +1,9 @@
 import React from 'react';
-import { NavigationScreenProp } from 'react-navigation';
 import {StyleSheet, Text, View, SectionList} from 'react-native';
 import { connect } from 'react-redux'
 
 import { ReduxState } from 'app/CombinedReducer';
-import LearnItem from './LearnItem';
+import InfoPreview from './InfoPreview';
 import { Info, InfoId, LearnInfoIds } from 'app/models/Info';
 import styles from 'app/common/GlobalStyles'
 
@@ -13,15 +12,7 @@ interface StateProps {
   learnInfoIds: LearnInfoIds
 }
 
-interface OuterProps {
-  navigation: NavigationScreenProp<any,any>
-}
-
-class LearnIndexScreen extends React.Component<StateProps & OuterProps> {
-  navigateToInfo(info: Info) {
-    this.props.navigation.navigate("Info", {infos: [info]})
-  }
-
+class LearnIndexScreen extends React.Component<StateProps> {
   getInfo(category: string) {
     return this.props.learnInfoIds[category]
       .map((id) => this.props.infos.get(id))
@@ -32,10 +23,14 @@ class LearnIndexScreen extends React.Component<StateProps & OuterProps> {
       <View style={[localStyles.info, styles.wrapper]}>
         <Text style={styles.h1}>Learn!</Text>
         <SectionList
-          renderItem={({item}) => <LearnItem info={item} onPress={() => this.navigateToInfo(item)}/>}
-          renderSectionHeader={({section: {title}}) => (
-            <Text style={[styles.h3, localStyles.section]}>{title}</Text>
-          )}
+          renderItem={({item}) => <InfoPreview key={item.id} info={item} />}
+          renderSectionHeader={({section: {title, data}}) => {
+            if (data.length > 0) {
+              return <Text style={[styles.h3, localStyles.section]}>{title}</Text>
+            } else {
+              return null
+            }
+          }}
           sections={[
             {title: 'General', data: this.getInfo("general")},
             {title: 'Ingredients', data: this.getInfo("ingredients")},
